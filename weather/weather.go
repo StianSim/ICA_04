@@ -1,7 +1,10 @@
 package weather
 
 import (
+    "net/http"
     "log"
+    "time"
+    "io/ioutil"
 )
 
 // A generic check for error handling
@@ -9,6 +12,25 @@ func check(e error) {
     if e != nil {
         log.Fatal(e)
     }
+}
+
+// Meant to be used in goroutines to periodically poll for json responses
+func WeatherLoop(url string, filename string, timeout time.Duration) {
+    for {
+        getResponse(url, filename)
+        log.Println("Updated " + filename)
+        time.Sleep(timeout * time.Minute)
+    }
+}
+
+// Downloads a json response and saves it in responses/filename
+func getResponse(url string, filename string) {
+    resp, err := http.Get(url)
+    check(err)
+    defer resp.Body.Close()
+    body, err := ioutil.ReadAll(resp.Body)
+    err = ioutil.WriteFile("responses/" + filename, body, 0644)
+    check(err)
 }
 
 // Takes a degree and returns the name for a wind direction

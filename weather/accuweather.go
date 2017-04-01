@@ -1,13 +1,9 @@
 package weather
 
 import (
-    "net/http"
     "encoding/json"
     "time"
-    "io/ioutil"
     "os"
-    "log"
-    "../config"
 )
 
 // Returns the last polled response from AccuWeather
@@ -21,26 +17,6 @@ func AccuWeatherResp() AccuWeatherData {
     err = json.NewDecoder(f).Decode(&data)
     check(err)
     return data
-}
-
-// A loop that regularly polls AccuWeather for weather information
-func AccuWeatherLoop() {
-    for {
-        accuWeather()
-        log.Println("Updated AccuWeather")
-        // Sleep for 20 minutes to safely fit inside AccuWeather's API rate limits
-        time.Sleep(20 * time.Minute)
-    }
-}
-
-func accuWeather() {
-    c := config.GetConfig()
-    resp, err := http.Get(c.Weather.AccuWeather)
-    check(err)
-    defer resp.Body.Close()
-    body, err := ioutil.ReadAll(resp.Body)
-    err = ioutil.WriteFile("responses/accuweather.json", body, 0644)
-    check(err)
 }
 
 // Automatically generated struct

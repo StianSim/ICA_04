@@ -4,6 +4,7 @@ import (
     "github.com/go-martini/martini"
     "github.com/martini-contrib/render"
     "./weather"
+    "./config"
 )
 
 
@@ -13,8 +14,9 @@ func main() {
     // Tell the server to use an instance of the renderer from the render package
     server.Use(render.Renderer())
 
+    c := config.GetConfig()
     // Start polling AccuWeather for responses in another thread
-    go weather.AccuWeatherLoop()
+    go weather.WeatherLoop(c.Weather.AccuWeather, "accuweather.json", 20)
 
     // Map / (the default endpoint when accessing a server) to the following response
     server.Get("/", func(r render.Render, args martini.Params) {
