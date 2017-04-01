@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<head>
+    {{/* {{ . }} will return the argument passed to the template 
+        More information about templates here:
+        https://golang.org/pkg/text/template/
+    */}}
+    <title>{{ . }}</title>
+</head>
+<body>
+    {{/* Since the argument is a struct, we can access fields like this */}}
+    <h1>{{ .Temperature.Metric.Value }}°{{ .Temperature.Metric.Unit }}</h1>
+</body>

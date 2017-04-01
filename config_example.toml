@@ -1,0 +1,5 @@
+[weather]
+wunderground = "http://api.wunderground.com/api/<your api key>/conditions/q/NO/Kristiansand.json"
+openweathermap = "http://api.openweathermap.org/data/2.5/weather?APPID=<your api key>&unitss=metric&q=Kristiansand"
+accuweather = ""http://dataservice.accuweather.com/currentconditions/v1/261324?apikey=<your api key>"
+
