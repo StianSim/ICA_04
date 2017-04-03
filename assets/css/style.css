@@ -31,6 +31,11 @@ header h1 {
     margin-top: 0px;
 }
 
+header h1 a {
+    text-decoration: none;
+    color: #fff;
+}
+
 header h2 {
     padding: 0 80px 0 80px;
     margin-bottom: 0px;
@@ -44,6 +49,10 @@ header h2 {
 .tooltip {
     display: inline;
     position: relative;
+}
+
+.tooltip:hover {
+    cursor: pointer;
 }
 
 .tooltip:hover:after{

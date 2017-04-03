@@ -13,7 +13,7 @@
 <body>
     <header>
         {{/* Since the argument is a struct, we can access fields like this */}}
-        <h1><i class="fa fa-map-marker" aria-hidden="true"></i> {{ .Location.Name }}</h1>
+        <h1><a href="/"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ .Location.Name }}</a></h1>
         <h2>
             <a field="Yr: {{ with $yr := index .Yr.Weatherdata.Observations.Weatherstation 0}}{{ $yr.Temperature.Value}}{{ end }}°C |
                         OpenWeatherMap: {{ .OpenWeatherMap.Main.Temp }}°C |
