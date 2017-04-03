@@ -20,7 +20,7 @@ func OpenWeatherMap() OpenWeatherData {
 
 type OpenWeatherData struct {
 	Coord struct {
-		Lon int `json:"lon"`
+		Lon float64 `json:"lon"`
 		Lat float64 `json:"lat"`
 	} `json:"coord"`
 	Weather []struct {
