@@ -34,7 +34,7 @@ type DarkSkyData struct {
 		DewPoint float64 `json:"dewPoint"`
 		Humidity float64 `json:"humidity"`
 		WindSpeed float64 `json:"windSpeed"`
-		WindBearing int `json:"windBearing"`
+		WindBearing float64 `json:"windBearing"`
 		Visibility float64 `json:"visibility"`
 		CloudCover float64 `json:"cloudCover"`
 		Pressure float64 `json:"pressure"`

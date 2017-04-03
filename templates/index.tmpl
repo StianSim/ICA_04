@@ -4,22 +4,75 @@
         More information about templates here:
         https://golang.org/pkg/text/template/
     */}}
-    <title>{{ .Location.Name }}</title>
+    <title>Vær for {{ .Location.Name }}</title>
+    <script src="https://use.fontawesome.com/1952921e42.js"></script>
+    <link href="/assets/css/weather-icons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
-    <style>
-    body {
-      font-size: 2em;
-      font-family: 'Oswald', sans-serif;
-      color: #fff;
-      background: #141E30;
-      margin: 0 80px 0 80px;
-    }
-    </style>
+    <link href="/assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-    {{/* Since the argument is a struct, we can access fields like this */}}
-    <h1>{{ .Temperature | printf "%.2f" }}°C</h1>
-    <p>{{ .Conditions }}</p>
-    <p>{{ .WindSpeed | printf "%.2f" }} m/s ({{ .WindDirection }})</p>
-    <h2> This information was sponsored by Crippling Depression weather service </h2>
+    <header>
+        {{/* Since the argument is a struct, we can access fields like this */}}
+        <h1><i class="fa fa-map-marker" aria-hidden="true"></i> {{ .Location.Name }}</h1>
+        <h2>
+            <a field="Yr: {{ with $yr := index .Yr.Weatherdata.Observations.Weatherstation 0}}{{ $yr.Temperature.Value}}{{ end }}°C |
+                        OpenWeatherMap: {{ .OpenWeatherMap.Main.Temp }}°C |
+                        Wunderground: {{ .Wunderground.CurrentObservation.TempC }}°C |
+                        AccuWeather: {{ with $acw := index .AccuWeather 0 }}{{ $acw.Temperature.Metric.Value }}{{ end }}°C |
+                        DarkSky: {{ .DarkSky.Currently.Temperature }}°F" class="tooltip">
+                <i class="wi wi-thermometer"></i>
+                {{ .Temperature | printf "%.2f" }}°C
+            </a> |
+            <a field="Yr: {{ with $yr := index .Yr.Weatherdata.Forecast.Tabular.Time 0 }}{{ $yr.Symbol.Name }}{{ end }} |
+                        OpenWeatherMap: {{ with $owm := index .OpenWeatherMap.Weather 0 }}{{ $owm.Main }}{{ end }} |
+                        Wunderground: {{ .Wunderground.CurrentObservation.Weather }} |
+                        DarkSky: {{ .DarkSky.Currently.Summary }}
+            " class="tooltip">
+                {{ .Conditions }}
+            </a> |
+            <a field="Yr: {{ with $yr := index .Yr.Weatherdata.Observations.Weatherstation 0 }}{{ $yr.WindSpeed.Mps }}{{ end }} m/s |
+                        OpenWeatherMap: {{ .OpenWeatherMap.Wind.Speed }} m/s |
+                        Wunderground: {{ .Wunderground.CurrentObservation.WindKph }} km/t |
+                        DarkSky: {{ .DarkSky.Currently.WindSpeed }} mph
+                        " class="tooltip">
+                <i class="wi wi-wind-direction"></i>
+                {{ .WindSpeed | printf "%.2f" }} m/s ({{ .WindDirection }})
+            </a>
+        </h2>
+    </header>
+    <div id="map"></div>
+    <footer>
+        <p>
+            <a href="https://github.com/crippling-depression/is105-ica05" target="_blank">GitHub</a> |
+            <a href="http://yr.no/" target="_blank">Yr.no</a> |
+            <a href="http://openweathermap.org/" target="_blank">OpenWeatherMap</a> |
+            <a href="https://www.wunderground.com/" target="_blank">Wunderground</a> |
+            <a href="http://www.accuweather.com/" target="_blank">AccuWeather</a> |
+            <a href="https://darksky.net/app/" target="_blank">DarkSky</a>
+        </p>
+    </footer>
+    <script>
+      function initMap() {
+        var p = {lat: {{ .Location.Lat }}, lng: {{ .Location.Lon }} };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: p,
+          scrollwheel: false,
+          navigationControl: false,
+          mapTypeControl: false,
+          scaleControl: false,
+          draggable: false
+        });
+        var marker = new google.maps.Marker({
+          position: p,
+          map: map
+        });
+        map.addListener('center_changed', function() {
+            window.setTimeout(function() {
+                // send request to server to get info
+            }, 3000);
+        });
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD47tsrzufdt_pEVFeKht758huxp2j5ol8&callback=initMap"></script>
 </body>

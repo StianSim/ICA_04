@@ -13,7 +13,7 @@ func main() {
     server := martini.Classic()
     // Tell the server to use an instance of the renderer from the render package
     server.Use(render.Renderer())
-
+    server.Use(martini.Static("assets", martini.StaticOptions{Prefix: "/assets"}))
     c := config.GetConfig()
     // Start polling AccuWeather for responses in another thread
     go weather.WeatherLoop(c.Weather.AccuWeather, "accuweather.json", 20)

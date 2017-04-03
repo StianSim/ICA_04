@@ -5,6 +5,7 @@ import (
     "log"
     "time"
     "io/ioutil"
+    "strconv"
 )
 
 // A generic check for error handling
@@ -75,6 +76,10 @@ func KphToMs(kph float64) float64 {
   return kph / 3.6
 }
 
+func MphToMs(mph float64) float64 {
+    return mph * 0.44704
+}
+
 func Average(u ...float64) float64 {
   var total float64
   for _, i := range u {
@@ -87,6 +92,12 @@ func FahrenheitToCelcius(f float64) float64 {
 	return (f - 32.0) / 1.8
 }
 
+func StringToFloat(s string) float64 {
+    f, err := strconv.ParseFloat(s, 64)
+    check(err)
+    return f
+}
+
 // Returns a "unified" struct with consolidated data
 // As well as the individual sources' data in their respective
 // fields.
@@ -95,14 +106,30 @@ func GetWeather() Weather {
     owm := OpenWeatherMap()
     wun := Wunderground()
     yr := Yr()
-		dsk := DarkSky()
+    dsk := DarkSky()
     name := owm.Name
     lat := owm.Coord.Lat
     lon := owm.Coord.Lon
-    temp := Average(acw[0].Temperature.Metric.Value, owm.Main.Temp, wun.CurrentObservation.TempC, FahrenheitToCelcius(dsk.Currently.Temperature))
-    conditions := acw[0].WeatherText
-    windspeed := Average(owm.Wind.Speed, KphToMs(wun.CurrentObservation.WindKph))
-    winddirection := DegreeToName(Average(owm.Wind.Deg, wun.CurrentObservation.WindDegrees))
+    temp := Average(
+                acw[0].Temperature.Metric.Value,
+                owm.Main.Temp,
+                wun.CurrentObservation.TempC,
+                FahrenheitToCelcius(dsk.Currently.Temperature),
+                StringToFloat(yr.Weatherdata.Observations.Weatherstation[0].Temperature.Value),
+            )
+    conditions := yr.Weatherdata.Forecast.Tabular.Time[0].Symbol.Name
+    windspeed := Average(
+                    owm.Wind.Speed,
+                    KphToMs(wun.CurrentObservation.WindKph),
+                    StringToFloat(yr.Weatherdata.Observations.Weatherstation[0].WindSpeed.Mps),
+                    MphToMs(dsk.Currently.WindSpeed),
+                )
+    winddirection := DegreeToName(Average(
+                        owm.Wind.Deg,
+                        wun.CurrentObservation.WindDegrees,
+                        StringToFloat(yr.Weatherdata.Observations.Weatherstation[0].WindDirection.Deg),
+                        dsk.Currently.WindBearing,
+                    ))
     return Weather {
         Location: location {
             Name: name,
