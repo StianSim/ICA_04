@@ -32,15 +32,15 @@ type OpenWeatherData struct {
 	Base string `json:"base"`
 	Main struct {
 		Temp float64 `json:"temp"`
-		Pressure int `json:"pressure"`
-		Humidity int `json:"humidity"`
+		Pressure float64 `json:"pressure"`
+		Humidity float64 `json:"humidity"`
 		TempMin float64 `json:"temp_min"`
 		TempMax float64 `json:"temp_max"`
 	} `json:"main"`
 	Visibility int `json:"visibility"`
 	Wind struct {
 		Speed float64 `json:"speed"`
-		Deg int `json:"deg"`
+		Deg float64 `json:"deg"`
 	} `json:"wind"`
 	Clouds struct {
 		All int `json:"all"`
