@@ -100,6 +100,7 @@ func GetWeather() Weather {
     lat := owm.Coord.Lat
     lon := owm.Coord.Lon
     temp := Average(acw[0].Temperature.Metric.Value, owm.Main.Temp, wun.CurrentObservation.TempC, FahrenheitToCelcius(dsk.Currently.Temperature))
+    conditions := acw[0].WeatherText
     windspeed := Average(owm.Wind.Speed, KphToMs(wun.CurrentObservation.WindKph))
     winddirection := DegreeToName(Average(owm.Wind.Deg, wun.CurrentObservation.WindDegrees))
     return Weather {
@@ -108,6 +109,7 @@ func GetWeather() Weather {
             Lat: lat,
             Lon: lon,
         },
+        Conditions: conditions,
         Temperature: temp,
         WindSpeed: windspeed,
         WindDirection: winddirection,
@@ -115,12 +117,14 @@ func GetWeather() Weather {
         OpenWeatherMap: owm,
         Wunderground: wun,
         Yr: yr,
+        DarkSky: dsk,
     }
 
 }
 
 type Weather struct {
     Location location
+    Conditions string
     Temperature float64
     WindSpeed float64
     WindDirection string
@@ -128,6 +132,7 @@ type Weather struct {
     OpenWeatherMap OpenWeatherData
     Wunderground WundergroundData
     Yr YrData
+    DarkSky DarkSkyData
 }
 
 type location struct {

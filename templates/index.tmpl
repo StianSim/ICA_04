@@ -19,6 +19,7 @@
 <body>
     {{/* Since the argument is a struct, we can access fields like this */}}
     <h1>{{ .Temperature | printf "%.2f" }}°C</h1>
+    <p>{{ .Conditions }}</p>
     <p>{{ .WindSpeed | printf "%.2f" }} m/s ({{ .WindDirection }})</p>
     <h2> This information was sponsored by Crippling Depression weather service </h2>
 </body>
