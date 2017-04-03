@@ -76,12 +76,13 @@ func DegreeToName(deg float64) string {
 // fields.
 func GetWeather() Weather {
     acw := AccuWeather()
-    name := "Kristiansand"
-    lat := 0.0
-    lon := 0.0
-    temp := acw[0].Temperature.Metric.Value
-    windspeed := 0.0
-    winddirection := DegreeToName(0.0)
+    owm := OpenWeatherMap()
+    name := owm.Name
+    lat := owm.Coord.Lat
+    lon := owm.Coord.Lon
+    temp := (acw[0].Temperature.Metric.Value + owm.Main.Temp) / 2
+    windspeed := owm.Wind.Speed
+    winddirection := DegreeToName(owm.Wind.Deg)
     return Weather {
         Location: location {
             Name: name,
@@ -92,6 +93,7 @@ func GetWeather() Weather {
         WindSpeed: windspeed,
         WindDirection: winddirection,
         AccuWeather: acw,
+        OpenWeatherMap: owm,
     }
 
 }
@@ -102,6 +104,7 @@ type Weather struct {
     WindSpeed float64
     WindDirection string
     AccuWeather AccuWeatherData
+    OpenWeatherMap OpenWeatherData
 }
 
 type location struct {
