@@ -25,6 +25,7 @@ type weatherInfo struct {
     OpenWeatherMap string
     AccuWeather string
     Yr string
+		DarkSky string
 }
 
 // Generic error handling
