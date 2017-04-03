@@ -11,7 +11,7 @@ func OpenWeatherMap() OpenWeatherData {
     f, err := os.Open("responses/openweathermap.json")
     check(err)
     defer f.Close()
-    var data OpenWeatherMap
+    var data OpenWeatherData
     // Decode the file contents as json
     err = json.NewDecoder(f).Decode(&data)
     check(err)
