@@ -90,6 +90,7 @@ func GetWeather() Weather {
     acw := AccuWeather()
     owm := OpenWeatherMap()
     wun := Wunderground()
+    yr := Yr()
     name := owm.Name
     lat := owm.Coord.Lat
     lon := owm.Coord.Lon
@@ -108,6 +109,7 @@ func GetWeather() Weather {
         AccuWeather: acw,
         OpenWeatherMap: owm,
         Wunderground: wun,
+        Yr: yr,
     }
 
 }
@@ -120,6 +122,7 @@ type Weather struct {
     AccuWeather AccuWeatherData
     OpenWeatherMap OpenWeatherData
     Wunderground WundergroundData
+    Yr YrData
 }
 
 type location struct {

@@ -19,6 +19,7 @@ func main() {
     go weather.WeatherLoop(c.Weather.AccuWeather, "accuweather.json", 20)
     go weather.WeatherLoop(c.Weather.OpenWeatherMap, "openweathermap.json", 5)
     go weather.WeatherLoop(c.Weather.Wunderground, "wunderground.json", 15)
+    go weather.WeatherLoop(c.Weather.Yr, "yr.json", 20)
     // Map / (the default endpoint when accessing a server) to the following response
     server.Get("/", func(r render.Render, args martini.Params) {
 

@@ -24,6 +24,7 @@ type weatherInfo struct {
     Wunderground string
     OpenWeatherMap string
     AccuWeather string
+    Yr string
 }
 
 // Generic error handling
