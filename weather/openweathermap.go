@@ -18,6 +18,8 @@ func OpenWeatherMap() OpenWeatherData {
     return data
 }
 
+// Automatically generated struct
+// https://mholt.github.io/json-to-go/
 type OpenWeatherData struct {
 	Coord struct {
 		Lon float64 `json:"lon"`

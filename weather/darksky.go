@@ -18,6 +18,8 @@ func DarkSky() DarkSkyData {
     return data
 }
 
+// Automatically generated struct
+// https://mholt.github.io/json-to-go/
 type DarkSkyData struct {
 	Latitude float64 `json:"latitude"`
 	Longitude float64 `json:"longitude"`

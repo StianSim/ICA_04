@@ -6,7 +6,7 @@ import (
     "os"
 )
 
-
+// Return the latest data from Yr.
 func Yr() YrData {
     f, err := os.Open("responses/yr.json")
     check(err)
@@ -17,6 +17,8 @@ func Yr() YrData {
     return data
 }
 
+// Automatically generated struct
+// https://mholt.github.io/json-to-go/
 type YrData struct {
     Weatherdata struct {
         Credit struct {

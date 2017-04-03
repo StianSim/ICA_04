@@ -36,7 +36,7 @@ func getResponse(url string, filename string) {
 
 // Takes a degree and returns the name for a wind direction
 // Based on http://climate.umn.edu/snow_fence/components/winddirectionanddegreeswithouttable3.htm
-func DegreeToName(deg float64) string {
+func degreeToName(deg float64) string {
     if deg >= 11.25 && deg < 33.75 {
         return "Nord-nordøst"
     } else if deg >= 33.75 && deg < 56.25 {
@@ -72,27 +72,35 @@ func DegreeToName(deg float64) string {
     }
 }
 
-func KphToMs(kph float64) float64 {
+// Convert Kilometers per hour to meters per second
+func kphToMs(kph float64) float64 {
   return kph / 3.6
 }
 
-func MphToMs(mph float64) float64 {
+// Convert Miles per hour to meters per second
+func mphToMs(mph float64) float64 {
     return mph * 0.44704
 }
 
-func Average(u ...float64) float64 {
+// Return the average value of
+// a slice of float64 arguments.
+func average(u ...float64) float64 {
   var total float64
   for _, i := range u {
-    total += i
+    total += i // For each of the elements in u, add the value to the total
   }
-  return total / float64(len(u))
+  return total / float64(len(u)) // Then return the average of all the values
 }
 
-func FahrenheitToCelcius(f float64) float64 {
+// Convert Fahrenheit to Celcius
+func fahrenheitToCelcius(f float64) float64 {
 	return (f - 32.0) / 1.8
 }
 
-func StringToFloat(s string) float64 {
+// A helper function to parse a string to float,
+// which raises a fatal error if it encounters
+// an error.
+func stringToFloat(s string) float64 {
     f, err := strconv.ParseFloat(s, 64)
     check(err)
     return f
@@ -102,44 +110,46 @@ func StringToFloat(s string) float64 {
 // As well as the individual sources' data in their respective
 // fields.
 func GetWeather() Weather {
+    // Get the latest polled data from each of the APIs
     acw := AccuWeather()
     owm := OpenWeatherMap()
     wun := Wunderground()
     yr := Yr()
     dsk := DarkSky()
-    name := owm.Name
-    lat := owm.Coord.Lat
-    lon := owm.Coord.Lon
-    temp := Average(
-                acw[0].Temperature.Metric.Value,
-                owm.Main.Temp,
-                wun.CurrentObservation.TempC,
-                FahrenheitToCelcius(dsk.Currently.Temperature),
-                StringToFloat(yr.Weatherdata.Observations.Weatherstation[0].Temperature.Value),
-            )
-    conditions := yr.Weatherdata.Forecast.Tabular.Time[0].Symbol.Name
-    windspeed := Average(
-                    owm.Wind.Speed,
-                    KphToMs(wun.CurrentObservation.WindKph),
-                    StringToFloat(yr.Weatherdata.Observations.Weatherstation[0].WindSpeed.Mps),
-                    MphToMs(dsk.Currently.WindSpeed),
-                )
-    winddirection := DegreeToName(Average(
-                        owm.Wind.Deg,
-                        wun.CurrentObservation.WindDegrees,
-                        StringToFloat(yr.Weatherdata.Observations.Weatherstation[0].WindDirection.Deg),
-                        dsk.Currently.WindBearing,
-                    ))
+
     return Weather {
         Location: location {
-            Name: name,
-            Lat: lat,
-            Lon: lon,
+            Name: owm.Name, // Name of the location
+            Lat: owm.Coord.Lat, // Latitude
+            Lon: owm.Coord.Lon, // Longitude
         },
-        Conditions: conditions,
-        Temperature: temp,
-        WindSpeed: windspeed,
-        WindDirection: winddirection,
+        // Conditions as per Yr.no's descriptions, chosen purely because it is in Norwegian
+        Conditions: yr.Weatherdata.Forecast.Tabular.Time[0].Symbol.Name,
+        // Get the average temperature from all of the API's latest readings
+        Temperature: average(
+            acw[0].Temperature.Metric.Value,
+            owm.Main.Temp,
+            wun.CurrentObservation.TempC,
+            fahrenheitToCelcius(dsk.Currently.Temperature),
+            stringToFloat(yr.Weatherdata.Observations.Weatherstation[0].Temperature.Value),
+        ),
+        // Get the average wind speed in meters per second from the APIs that carry
+        // that information
+        WindSpeed: average(
+            owm.Wind.Speed,
+            kphToMs(wun.CurrentObservation.WindKph),
+            stringToFloat(yr.Weatherdata.Observations.Weatherstation[0].WindSpeed.Mps),
+            mphToMs(dsk.Currently.WindSpeed),
+        ),
+
+        // Average the wind direction in degrees and get the Norwegian name for the direction
+        WindDirection: degreeToName(average(
+            owm.Wind.Deg,
+            wun.CurrentObservation.WindDegrees,
+            stringToFloat(yr.Weatherdata.Observations.Weatherstation[0].WindDirection.Deg),
+            dsk.Currently.WindBearing,
+        )),
+        // Store the individual data
         AccuWeather: acw,
         OpenWeatherMap: owm,
         Wunderground: wun,

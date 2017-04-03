@@ -17,6 +17,8 @@ func Wunderground() WundergroundData {
   return data
 }
 
+// Automatically generated struct
+// https://mholt.github.io/json-to-go/
 type WundergroundData struct {
 	Response struct {
 		Version string `json:"version"`
