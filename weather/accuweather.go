@@ -7,7 +7,7 @@ import (
 )
 
 // Returns the last polled response from AccuWeather
-func AccuWeatherResp() AccuWeatherData {
+func AccuWeather() AccuWeatherData {
     // The response is saved on disk, so that's where we're reading from
     f, err := os.Open("responses/accuweather.json")
     check(err)

@@ -25,5 +25,5 @@ _testmain.go
 
 # Project specifics
 config.toml
-responses
+responses/*
 

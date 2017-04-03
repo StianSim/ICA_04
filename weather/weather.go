@@ -70,3 +70,42 @@ func DegreeToName(deg float64) string {
         return "Nord"
     }
 }
+
+// Returns a "unified" struct with consolidated data
+// As well as the individual sources' data in their respective
+// fields.
+func GetWeather() Weather {
+    acw := AccuWeather()
+    name := "Kristiansand"
+    lat := 0.0
+    lon := 0.0
+    temp := acw[0].Temperature.Metric.Value
+    windspeed := 0.0
+    winddirection := DegreeToName(0.0)
+    return Weather {
+        Location: location {
+            Name: name,
+            Lat: lat,
+            Lon: lon,
+        },
+        Temperature: temp,
+        WindSpeed: windspeed,
+        WindDirection: winddirection,
+        AccuWeather: acw,
+    }
+
+}
+
+type Weather struct {
+    Location location
+    Temperature float64
+    WindSpeed float64
+    WindDirection string
+    AccuWeather AccuWeatherData
+}
+
+type location struct {
+    Name string
+    Lat float64
+    Lon float64
+}

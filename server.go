@@ -24,7 +24,7 @@ func main() {
         // Get the latest polled response from AccuWeather and store it in p.
         // Since the AccuWeatherData type is a list of structs, and we only want the first element,
         // [0] is used to get that element at the first index.
-        p := weather.AccuWeatherResp()[0]
+        p := weather.GetWeather()
 
         // Render the contents of "templates/index.tmpl", and pass p to it.
         r.HTML(200, "index", p)
