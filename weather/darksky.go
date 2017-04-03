@@ -27,8 +27,8 @@ type DarkSkyData struct {
 		Time int `json:"time"`
 		Summary string `json:"summary"`
 		Icon string `json:"icon"`
-		PrecipIntensity int `json:"precipIntensity"`
-		PrecipProbability int `json:"precipProbability"`
+		PrecipIntensity float64 `json:"precipIntensity"`
+		PrecipProbability float64 `json:"precipProbability"`
 		Temperature float64 `json:"temperature"`
 		ApparentTemperature float64 `json:"apparentTemperature"`
 		DewPoint float64 `json:"dewPoint"`
@@ -47,8 +47,8 @@ type DarkSkyData struct {
 			Time int `json:"time"`
 			Summary string `json:"summary"`
 			Icon string `json:"icon"`
-			PrecipIntensity int `json:"precipIntensity"`
-			PrecipProbability int `json:"precipProbability"`
+			PrecipIntensity float64 `json:"precipIntensity"`
+			PrecipProbability float64 `json:"precipProbability"`
 			Temperature float64 `json:"temperature"`
 			ApparentTemperature float64 `json:"apparentTemperature"`
 			DewPoint float64 `json:"dewPoint"`
@@ -72,9 +72,9 @@ type DarkSkyData struct {
 			SunriseTime int `json:"sunriseTime"`
 			SunsetTime int `json:"sunsetTime"`
 			MoonPhase float64 `json:"moonPhase"`
-			PrecipIntensity int `json:"precipIntensity"`
-			PrecipIntensityMax int `json:"precipIntensityMax"`
-			PrecipProbability int `json:"precipProbability"`
+			PrecipIntensity float64 `json:"precipIntensity"`
+			PrecipIntensityMax float64 `json:"precipIntensityMax"`
+			PrecipProbability float64 `json:"precipProbability"`
 			TemperatureMin float64 `json:"temperatureMin"`
 			TemperatureMinTime int `json:"temperatureMinTime"`
 			TemperatureMax float64 `json:"temperatureMax"`
@@ -86,7 +86,7 @@ type DarkSkyData struct {
 			DewPoint float64 `json:"dewPoint"`
 			Humidity float64 `json:"humidity"`
 			WindSpeed float64 `json:"windSpeed"`
-			WindBearing int `json:"windBearing"`
+			WindBearing float64 `json:"windBearing"`
 			Visibility float64 `json:"visibility,omitempty"`
 			CloudCover float64 `json:"cloudCover"`
 			Pressure float64 `json:"pressure"`

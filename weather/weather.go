@@ -83,6 +83,10 @@ func Average(u ...float64) float64 {
   return total / float64(len(u))
 }
 
+func FahrenheitToCelcius(f float64) float64 {
+	return (f - 32.0) / 1.8
+}
+
 // Returns a "unified" struct with consolidated data
 // As well as the individual sources' data in their respective
 // fields.
@@ -91,10 +95,11 @@ func GetWeather() Weather {
     owm := OpenWeatherMap()
     wun := Wunderground()
     yr := Yr()
+		dsk := DarkSky()
     name := owm.Name
     lat := owm.Coord.Lat
     lon := owm.Coord.Lon
-    temp := Average(acw[0].Temperature.Metric.Value, owm.Main.Temp, wun.CurrentObservation.TempC)
+    temp := Average(acw[0].Temperature.Metric.Value, owm.Main.Temp, wun.CurrentObservation.TempC, FahrenheitToCelcius(dsk.Currently.Temperature))
     windspeed := Average(owm.Wind.Speed, KphToMs(wun.CurrentObservation.WindKph))
     winddirection := DegreeToName(Average(owm.Wind.Deg, wun.CurrentObservation.WindDegrees))
     return Weather {
