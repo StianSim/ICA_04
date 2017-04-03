@@ -5,9 +5,20 @@
         https://golang.org/pkg/text/template/
     */}}
     <title>{{ .Location.Name }}</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+    <style>
+    body {
+      font-size: 2em;
+      font-family: 'Oswald', sans-serif;
+      color: #fff;
+      background: #141E30;
+      margin: 0 80px 0 80px;
+    }
+    </style>
 </head>
 <body>
     {{/* Since the argument is a struct, we can access fields like this */}}
     <h1>{{ .Temperature | printf "%.2f" }}°C</h1>
     <p>{{ .WindSpeed | printf "%.2f" }} m/s ({{ .WindDirection }})</p>
+    <h2> This information was sponsored by Crippling Depression weather service </h2>
 </body>

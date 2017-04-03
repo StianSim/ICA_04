@@ -67,7 +67,6 @@ type YrData struct {
                         To string `json:"@to"`
                         Body struct {
                             Text string `json:"#text"`
-                            Strong []string `json:"strong"`
                         } `json:"body"`
                         Title string `json:"title"`
                     } `json:"time"`
