@@ -71,18 +71,31 @@ func DegreeToName(deg float64) string {
     }
 }
 
+func KphToMs(kph float64) float64 {
+  return kph / 3.6
+}
+
+func Average(u ...float64) float64 {
+  var total float64
+  for _, i := range u {
+    total += i
+  }
+  return total / float64(len(u))
+}
+
 // Returns a "unified" struct with consolidated data
 // As well as the individual sources' data in their respective
 // fields.
 func GetWeather() Weather {
     acw := AccuWeather()
     owm := OpenWeatherMap()
+    wun := Wunderground()
     name := owm.Name
     lat := owm.Coord.Lat
     lon := owm.Coord.Lon
-    temp := (acw[0].Temperature.Metric.Value + owm.Main.Temp) / 2
-    windspeed := owm.Wind.Speed
-    winddirection := DegreeToName(owm.Wind.Deg)
+    temp := Average(acw[0].Temperature.Metric.Value, owm.Main.Temp, wun.CurrentObservation.TempC)
+    windspeed := Average(owm.Wind.Speed, KphToMs(wun.CurrentObservation.WindKph))
+    winddirection := DegreeToName(Average(owm.Wind.Deg, wun.CurrentObservation.WindDegrees))
     return Weather {
         Location: location {
             Name: name,
@@ -94,6 +107,7 @@ func GetWeather() Weather {
         WindDirection: winddirection,
         AccuWeather: acw,
         OpenWeatherMap: owm,
+        Wunderground: wun,
     }
 
 }
@@ -105,6 +119,7 @@ type Weather struct {
     WindDirection string
     AccuWeather AccuWeatherData
     OpenWeatherMap OpenWeatherData
+    Wunderground WundergroundData
 }
 
 type location struct {

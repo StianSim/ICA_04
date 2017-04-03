@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    {{/* {{ . }} will return the argument passed to the template 
+    {{/* {{ . }} will return the argument passed to the template
         More information about templates here:
         https://golang.org/pkg/text/template/
     */}}
@@ -8,6 +8,6 @@
 </head>
 <body>
     {{/* Since the argument is a struct, we can access fields like this */}}
-    <h1>{{ .Temperature }}°C</h1>
-    <p>{{ .WindDirection }}</p>
+    <h1>{{ .Temperature | printf "%.2f" }}°C</h1>
+    <p>{{ .WindSpeed | printf "%.2f" }} m/s ({{ .WindDirection }})</p>
 </body>
