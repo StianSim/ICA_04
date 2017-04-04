@@ -1,4 +1,4 @@
-  # is105-ica05
+ # [is105-ica05](https://darn.site/)
 
 En konsolideringsside for været i Kristiansand. Ved gjennomsnittsverdier av data fra flere kilder siktes det mot mer "pålitelig" informasjon.
 Informasjonen vi får fra gjennomsnittsverdiene er: Temperatur, vindretning og vindstyrke.
