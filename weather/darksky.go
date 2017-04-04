@@ -15,6 +15,7 @@ func DarkSky() DarkSkyData {
     // Decode the file contents as json
     err = json.NewDecoder(f).Decode(&data)
     check(err)
+    data.Currently.WindSpeedMs = mphToMs(data.Currently.WindSpeed)
     return data
 }
 
@@ -36,6 +37,7 @@ type DarkSkyData struct {
 		DewPoint float64 `json:"dewPoint"`
 		Humidity float64 `json:"humidity"`
 		WindSpeed float64 `json:"windSpeed"`
+        WindSpeedMs float64 // Field not in JSON, intended to be assigned after parsing
 		WindBearing float64 `json:"windBearing"`
 		Visibility float64 `json:"visibility"`
 		CloudCover float64 `json:"cloudCover"`

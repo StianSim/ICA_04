@@ -6,15 +6,17 @@ import (
 )
 
 func Wunderground() WundergroundData {
-  // The response is saved on disk, so that's where we're reading from
-  f, err := os.Open("responses/wunderground.json")
-  check(err)
-  defer f.Close()
-  var data WundergroundData
-  // Decode the file contents as json
-  err = json.NewDecoder(f).Decode(&data)
-  check(err)
-  return data
+    // The response is saved on disk, so that's where we're reading from
+    f, err := os.Open("responses/wunderground.json")
+    check(err)
+    defer f.Close()
+    var data WundergroundData
+    // Decode the file contents as json
+    err = json.NewDecoder(f).Decode(&data)
+    check(err)
+    // Assign data to the unitialized WindMs field for printing on the front-end.
+    data.CurrentObservation.WindMs = kphToMs(data.CurrentObservation.WindKph)
+    return data
 }
 
 // Automatically generated struct
@@ -79,6 +81,7 @@ type WundergroundData struct {
 		WindMph float64 `json:"wind_mph"`
 		WindGustMph float64 `json:"wind_gust_mph"`
 		WindKph float64 `json:"wind_kph"`
+        WindMs float64 // This is not a field in json, but will be added later.
 		WindGustKph float64 `json:"wind_gust_kph"`
 		PressureMb string `json:"pressure_mb"`
 		PressureIn string `json:"pressure_in"`

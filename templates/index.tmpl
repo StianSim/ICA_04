@@ -32,8 +32,8 @@
             </a> |
             <a field="Yr: {{ with $yr := index .Yr.Weatherdata.Observations.Weatherstation 0 }}{{ $yr.WindSpeed.Mps }}{{ end }} m/s |
                         OpenWeatherMap: {{ .OpenWeatherMap.Wind.Speed }} m/s |
-                        Wunderground: {{ .Wunderground.CurrentObservation.WindKph }} km/t |
-                        DarkSky: {{ .DarkSky.Currently.WindSpeed }} mph
+                        Wunderground: {{ .Wunderground.CurrentObservation.WindMs | printf "%.2f" }} m/s |
+                        DarkSky: {{ .DarkSky.Currently.WindSpeedMs | printf "%.2f" }} m/s
                         " class="tooltip">
                 <i class="wi wi-wind-direction"></i>
                 {{ .WindSpeed | printf "%.2f" }} m/s ({{ .WindDirection }})

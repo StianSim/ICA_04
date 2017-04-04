@@ -137,9 +137,9 @@ func GetWeather() Weather {
         // that information
         WindSpeed: average(
             owm.Wind.Speed,
-            kphToMs(wun.CurrentObservation.WindKph),
+            wun.CurrentObservation.WindMs,
             stringToFloat(yr.Weatherdata.Observations.Weatherstation[0].WindSpeed.Mps),
-            mphToMs(dsk.Currently.WindSpeed),
+            dsk.Currently.WindSpeedMs,
         ),
 
         // Average the wind direction in degrees and get the Norwegian name for the direction
