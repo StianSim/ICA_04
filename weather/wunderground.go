@@ -28,6 +28,10 @@ type WundergroundData struct {
 		Features struct {
 			Conditions int `json:"conditions"`
 		} `json:"features"`
+        Error struct { // This field will normally not be set, unless there is an error.
+            Type string
+            Description string
+        }
 	} `json:"response"`
 	CurrentObservation struct {
 		Image struct {

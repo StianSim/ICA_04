@@ -59,4 +59,5 @@ type OpenWeatherData struct {
 	ID int `json:"id"`
 	Name string `json:"name"`
 	Cod int `json:"cod"`
+    Message string // This field will normally not be set, unless there is an error
 }
