@@ -19,8 +19,15 @@ Sidene som blir spurt etter informasjon er [Yr.no](http://yr.no/), [OpenWeatherM
 
 Henting av informasjon er satt opp som goroutines i `server.go`, da for både å hedre API-restriksjoner, samt å vise et klart eksempel for concurrency.
 
-I bunnen av dette dokumentet finnes instruksjoner for å kunne sette opp dette systemet
-selv.
+I bunnen av dette dokumentet finnes instruksjoner for å kunne sette opp dette systemet selv.
+
+## Systemarkitektur
+
+Konsolideringsserveren henter periodevis data fra forskjellige API-er og mellomlagrer informasjonen. Når en bruker vil se på siden, er det data som sist ble hentet som vises.
+Dermed blir det ikke unødvendig mange kall til API-ene bak om det er mange brukere som vil se på den konsoliderte siden.
+Her er en illustrasjon som viser logikken, både henting og sending av data blir sendt over HTTP eller HTTPS.
+
+![Systemarkitektur-sketch](https://raw.githubusercontent.com/crippling-depression/is105-ica05/master/assets/system-arch-sketch.png)
 
 
 ## Ekstra informasjon
