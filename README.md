@@ -1,11 +1,11 @@
   # is105-ica05
 
 En konsolideringsside for været i Kristiansand. Ved gjennomsnittsverdier av data fra flere kilder siktes det mot mer "pålitelig" informasjon.
-informasjonen vi får fra gjennomsnittsverdiene er: Temperatur, vindretning og vindstyrke.
+Informasjonen vi får fra gjennomsnittsverdiene er: Temperatur, vindretning og vindstyrke.
 Værtypen har vi valgt å ta informasjon fra er Yr.no, fordi de gir oss typen på norsk.
 Temperatur er målt i °C, siden det er Temperaturverdien vi benytter i Norge.
-vindstyrke er målt i m/s, som er den mest vanlige verdien for måling av vind.
-vindretningsverdiene er hentet fra http://climate.umn.edu/snow_fence/components/winddirectionanddegreeswithouttable3.htm
+Vindstyrke er målt i m/s, som er den mest vanlige verdien for måling av vind.
+Vindretningsverdiene er hentet fra [climate.umn.edu](http://climate.umn.edu/snow_fence/components/winddirectionanddegreeswithouttable3.htm)
 og forteller i hvilken retning det blåser fra.
 
 Hvis vi holder musen over de forskjellige verdiene, vil vi få informasjonen fra hver enkelt side vi bruker informasjon fra.
