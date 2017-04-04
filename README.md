@@ -29,6 +29,9 @@ Her er en illustrasjon som viser logikken, både henting og sending av data blir
 
 ![Systemarkitektur-sketch](https://raw.githubusercontent.com/crippling-depression/is105-ica05/master/assets/system-arch-sketch.png)
 
+## Brukerhistorier
+
+Brukerhistorier finnes i [Brukerscenario.md](https://github.com/crippling-depression/is105-ica05/blob/master/Brukerscenario.md)
 
 ## Ekstra informasjon
 
