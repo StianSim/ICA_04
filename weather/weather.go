@@ -29,7 +29,7 @@ func WeatherLoop(url string, filename string, timeout time.Duration) {
 func getResponse(url string, filename string) {
     resp, err := http.Get(url)
     if err != nil {
-        log.Printf(err)
+        log.Println(err)
         // the server has struggled with timeouts recently,
         // so we'll just return out of the function if
         // the error occurs, instead of raising a fatal
