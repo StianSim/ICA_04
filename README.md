@@ -2,6 +2,8 @@
 
 En konsolideringsside for været i Kristiansand. Ved gjennomsnittsverdier av data fra flere kilder siktes det mot mer "pålitelig" informasjon.
 
+Siden er (stort sett) å finne her: https://darn.site/
+
 Sidene som blir spurt etter informasjon er [Yr.no](http://yr.no/), [OpenWeatherMap](http://openweathermap.org/), [Wunderground](https://www.wunderground.com/), [AccuWeather](http://www.accuweather.com/) og [DarkSky](https://darksky.net/app/).
 
 Henting av informasjon er satt opp som goroutines i `server.go`, da for både å hedre API-restriksjoner, samt å vise et klart eksempel for concurrency.
