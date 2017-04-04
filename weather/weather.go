@@ -6,6 +6,7 @@ import (
     "time"
     "io/ioutil"
     "strconv"
+    "math"
 )
 
 // A generic check for error handling
@@ -37,6 +38,7 @@ func getResponse(url string, filename string) {
 // Takes a degree and returns the name for a wind direction
 // Based on http://climate.umn.edu/snow_fence/components/winddirectionanddegreeswithouttable3.htm
 func degreeToName(deg float64) string {
+    deg = math.Mod(deg + 360, 360) // Make sure the degree is within 360
     if deg >= 11.25 && deg < 33.75 {
         return "Nord-nordøst"
     } else if deg >= 33.75 && deg < 56.25 {

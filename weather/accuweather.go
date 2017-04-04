@@ -41,8 +41,4 @@ type AccuWeatherData []struct {
     } `json:"Temperature"`
     MobileLink string `json:"MobileLink"`
     Link string `json:"Link"`
-    // The following fields will normally not be set, unless there is an error.
-    Code string
-    Message string
-    Reference string
 }
