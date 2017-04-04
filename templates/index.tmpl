@@ -7,7 +7,8 @@
     <title>Vær for {{ .Location.Name }}</title>
     <script src="https://use.fontawesome.com/1952921e42.js"></script>
     <link href="/assets/css/weather-icons.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+    <link href="/assets/css/weather-icons-wind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:700|Roboto" rel="stylesheet"> 
     <link href="/assets/css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -35,7 +36,7 @@
                         Wunderground: {{ .Wunderground.CurrentObservation.WindMs | printf "%.2f" }} m/s |
                         DarkSky: {{ .DarkSky.Currently.WindSpeedMs | printf "%.2f" }} m/s
                         " class="tooltip">
-                <i class="wi wi-wind-direction"></i>
+                <i class="wi wi-wind towards-{{ .WindDegree | printf "%.0f" }}-deg"></i>
                 {{ .WindSpeed | printf "%.2f" }} m/s ({{ .WindDirection }})
             </a>
         </h2>

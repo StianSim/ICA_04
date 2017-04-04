@@ -119,6 +119,12 @@ func GetWeather() Weather {
     yr := Yr()
     dsk := DarkSky()
 
+    wind := average(
+        owm.Wind.Deg,
+        wun.CurrentObservation.WindDegrees,
+        stringToFloat(yr.Weatherdata.Observations.Weatherstation[0].WindDirection.Deg),
+        dsk.Currently.WindBearing,
+    )
     return Weather {
         Location: location {
             Name: owm.Name, // Name of the location
@@ -145,12 +151,8 @@ func GetWeather() Weather {
         ),
 
         // Average the wind direction in degrees and get the Norwegian name for the direction
-        WindDirection: degreeToName(average(
-            owm.Wind.Deg,
-            wun.CurrentObservation.WindDegrees,
-            stringToFloat(yr.Weatherdata.Observations.Weatherstation[0].WindDirection.Deg),
-            dsk.Currently.WindBearing,
-        )),
+        WindDirection: degreeToName(wind),
+        WindDegree: wind,
         // Store the individual data
         AccuWeather: acw,
         OpenWeatherMap: owm,
@@ -167,6 +169,7 @@ type Weather struct {
     Temperature float64
     WindSpeed float64
     WindDirection string
+    WindDegree float64
     AccuWeather AccuWeatherData
     OpenWeatherMap OpenWeatherData
     Wunderground WundergroundData
