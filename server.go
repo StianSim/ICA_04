@@ -13,7 +13,7 @@ func main() {
     // Tell the server to use an instance of the renderer from the render package
     server.Use(render.Renderer())
     server.Use(martini.Static("assets", martini.StaticOptions{Prefix: "/assets"}))
-    c := config.GetConfig()
+    c := config.GetConfig("config.toml")
 
     // Start polling each of the APIs for responses in another thread.
     // The arguments passed to the loops are

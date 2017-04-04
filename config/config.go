@@ -6,8 +6,8 @@ import (
     "io/ioutil"
 )
 
-func GetConfig() tomlConfig {
-    c, err := ioutil.ReadFile("config.toml")
+func GetConfig(filename string) tomlConfig {
+    c, err := ioutil.ReadFile(filename)
     check(err)
     var config tomlConfig
     _, err = toml.Decode(string(c), &config)
@@ -25,7 +25,7 @@ type weatherInfo struct {
     OpenWeatherMap string
     AccuWeather string
     Yr string
-		DarkSky string
+    DarkSky string
 }
 
 // Generic error handling
