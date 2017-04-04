@@ -4,12 +4,11 @@ En konsolideringsside for været i Kristiansand. Ved gjennomsnittsverdier av dat
 informasjonen vi får fra gjennomsnittsverdiene er: Temperatur, vindretning og vindstyrke.
 Værtypen har vi valgt å ta informasjon fra er Yr.no, fordi de gir oss typen på norsk.
 Temperatur er målt i °C, siden det er Temperaturverdien vi benytter i Norge.
-vindstyrke er målt i m/s, som er den mest vanlige verdien får maling av vind.
+vindstyrke er målt i m/s, som er den mest vanlige verdien for måling av vind.
 vindretningsverdiene er hentet fra http://climate.umn.edu/snow_fence/components/winddirectionanddegreeswithouttable3.htm
 og forteller i hvilken retning det blåser fra.
 
-Hvis vi holder musen over de forskjellige verdiene, vil vi få informasjonen fra hver
-av sidene vi bruker informasjon fra.
+Hvis vi holder musen over de forskjellige verdiene, vil vi få informasjonen fra hver enkelt side vi bruker informasjon fra.
 Kartet, som er tatt fra Google Maps, er satt til å vise Kristiansand og omegn.
 Under kartet finner vi linker til de forskjellige værtjenestene, samt en link til
 vårt GitHub repository.
