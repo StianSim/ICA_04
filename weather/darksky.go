@@ -15,7 +15,9 @@ func DarkSky() DarkSkyData {
     // Decode the file contents as json
     err = json.NewDecoder(f).Decode(&data)
     check(err)
+    // Add relevant metric data for easy access on the frontend
     data.Currently.WindSpeedMs = mphToMs(data.Currently.WindSpeed)
+    data.Currently.TemperatureC = fahrenheitToCelsius(data.Currently.Temperature)
     return data
 }
 
@@ -33,6 +35,7 @@ type DarkSkyData struct {
 		PrecipIntensity float64 `json:"precipIntensity"`
 		PrecipProbability float64 `json:"precipProbability"`
 		Temperature float64 `json:"temperature"`
+        TemperatureC float64 // Field intended to be assigned after parsing
 		ApparentTemperature float64 `json:"apparentTemperature"`
 		DewPoint float64 `json:"dewPoint"`
 		Humidity float64 `json:"humidity"`

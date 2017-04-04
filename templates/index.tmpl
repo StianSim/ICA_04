@@ -19,7 +19,7 @@
                         OpenWeatherMap: {{ .OpenWeatherMap.Main.Temp }}°C |
                         Wunderground: {{ .Wunderground.CurrentObservation.TempC }}°C |
                         AccuWeather: {{ with $acw := index .AccuWeather 0 }}{{ $acw.Temperature.Metric.Value }}{{ end }}°C |
-                        DarkSky: {{ .DarkSky.Currently.Temperature }}°F" class="tooltip">
+                        DarkSky: {{ .DarkSky.Currently.TemperatureC | printf "%.2f" }}°C" class="tooltip">
                 <i class="wi wi-thermometer"></i>
                 {{ .Temperature | printf "%.2f" }}°C
             </a> |

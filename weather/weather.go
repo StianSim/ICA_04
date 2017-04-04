@@ -92,8 +92,8 @@ func average(u ...float64) float64 {
   return total / float64(len(u)) // Then return the average of all the values
 }
 
-// Convert Fahrenheit to Celcius
-func fahrenheitToCelcius(f float64) float64 {
+// Convert Fahrenheit to Celsius
+func fahrenheitToCelsius(f float64) float64 {
 	return (f - 32.0) / 1.8
 }
 
@@ -130,7 +130,7 @@ func GetWeather() Weather {
             acw[0].Temperature.Metric.Value,
             owm.Main.Temp,
             wun.CurrentObservation.TempC,
-            fahrenheitToCelcius(dsk.Currently.Temperature),
+            dsk.Currently.TemperatureC,
             stringToFloat(yr.Weatherdata.Observations.Weatherstation[0].Temperature.Value),
         ),
         // Get the average wind speed in meters per second from the APIs that carry
