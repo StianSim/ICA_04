@@ -83,10 +83,8 @@ type WundergroundData struct {
 		WindDir string `json:"wind_dir"`
 		WindDegrees float64 `json:"wind_degrees"`
 		WindMph float64 `json:"wind_mph"`
-		WindGustMph string `json:"wind_gust_mph"`
 		WindKph float64 `json:"wind_kph"`
         WindMs float64 // This is not a field in json, but will be added later.
-		WindGustKph string `json:"wind_gust_kph"`
 		PressureMb string `json:"pressure_mb"`
 		PressureIn string `json:"pressure_in"`
 		PressureTrend string `json:"pressure_trend"`
