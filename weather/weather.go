@@ -5,7 +5,6 @@ import (
     "log"
     "time"
     "io/ioutil"
-    "strconv"
     "math"
 )
 
@@ -105,15 +104,6 @@ func fahrenheitToCelsius(f float64) float64 {
 	return (f - 32.0) / 1.8
 }
 
-// A helper function to parse a string to float,
-// which raises a fatal error if it encounters
-// an error.
-func stringToFloat(s string) float64 {
-    f, err := strconv.ParseFloat(s, 64)
-    check(err)
-    return f
-}
-
 // Returns a "unified" struct with consolidated data
 // As well as the individual sources' data in their respective
 // fields.
@@ -128,7 +118,7 @@ func GetWeather() Weather {
     wind := average(
         owm.Wind.Deg,
         wun.CurrentObservation.WindDegrees,
-        stringToFloat(yr.Weatherdata.Observations.Weatherstation[0].WindDirection.Deg),
+        yr.Weatherdata.Observations.Weatherstation[0].WindDirection.Deg,
         dsk.Currently.WindBearing,
     )
     return Weather {
@@ -145,14 +135,14 @@ func GetWeather() Weather {
             owm.Main.Temp,
             wun.CurrentObservation.TempC,
             dsk.Currently.TemperatureC,
-            stringToFloat(yr.Weatherdata.Observations.Weatherstation[0].Temperature.Value),
+            yr.Weatherdata.Observations.Weatherstation[0].Temperature.Value,
         ),
         // Get the average wind speed in meters per second from the APIs that carry
         // that information
         WindSpeed: average(
             owm.Wind.Speed,
             wun.CurrentObservation.WindMs,
-            stringToFloat(yr.Weatherdata.Observations.Weatherstation[0].WindSpeed.Mps),
+            yr.Weatherdata.Observations.Weatherstation[0].WindSpeed.Mps,
             dsk.Currently.WindSpeedMs,
         ),
 

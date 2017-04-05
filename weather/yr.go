@@ -23,77 +23,76 @@ type YrData struct {
     Weatherdata struct {
         Credit struct {
             Link struct {
-                Text string `json:"@text"`
-                URL string `json:"@url"`
+                Text string `json:"text"`
+                URL string `json:"url"`
             } `json:"link"`
         } `json:"credit"`
         Forecast struct {
             Tabular struct {
                 Time []struct {
-                    From string `json:"@from"`
-                    Period string `json:"@period"`
-                    To string `json:"@to"`
+                    From string `json:"from"`
+                    Period int `json:"period"`
                     Precipitation struct {
-                        Value string `json:"@value"`
+                        Value int `json:"value"`
                     } `json:"precipitation"`
                     Pressure struct {
-                        Unit string `json:"@unit"`
-                        Value string `json:"@value"`
+                        Unit string `json:"unit"`
+                        Value float64 `json:"value"`
                     } `json:"pressure"`
                     Symbol struct {
-                        Name string `json:"@name"`
-                        Number string `json:"@number"`
-                        NumberEx string `json:"@numberEx"`
-                        Var string `json:"@var"`
+                        Name string `json:"name"`
+                        Number int `json:"number"`
+                        NumberEx int `json:"numberEx"`
                     } `json:"symbol"`
                     Temperature struct {
-                        Unit string `json:"@unit"`
-                        Value string `json:"@value"`
+                        Unit string `json:"unit"`
+                        Value int `json:"value"`
                     } `json:"temperature"`
+                    To string `json:"to"`
                     WindDirection struct {
-                        Code string `json:"@code"`
-                        Deg string `json:"@deg"`
-                        Name string `json:"@name"`
+                        Code string `json:"code"`
+                        Deg float64 `json:"deg"`
+                        Name string `json:"name"`
                     } `json:"windDirection"`
                     WindSpeed struct {
-                        Mps string `json:"@mps"`
-                        Name string `json:"@name"`
+                        Mps float64 `json:"mps"`
+                        Name string `json:"name"`
                     } `json:"windSpeed"`
                 } `json:"time"`
             } `json:"tabular"`
             Text struct {
                 Location struct {
-                    Name string `json:"@name"`
+                    Name string `json:"name"`
                     Time []struct {
-                        From string `json:"@from"`
-                        To string `json:"@to"`
                         Body struct {
                             Text string `json:"#text"`
                         } `json:"body"`
+                        From string `json:"from"`
                         Title string `json:"title"`
+                        To string `json:"to"`
                     } `json:"time"`
                 } `json:"location"`
             } `json:"text"`
         } `json:"forecast"`
         Links struct {
             Link []struct {
-                ID string `json:"@id"`
-                URL string `json:"@url"`
+                ID string `json:"id"`
+                URL string `json:"url"`
             } `json:"link"`
         } `json:"links"`
         Location struct {
             Country string `json:"country"`
             Location struct {
-                Altitude string `json:"@altitude"`
-                Geobase string `json:"@geobase"`
-                Geobaseid string `json:"@geobaseid"`
-                Latitude string `json:"@latitude"`
-                Longitude string `json:"@longitude"`
+                Altitude int `json:"altitude"`
+                Geobase string `json:"geobase"`
+                Geobaseid int `json:"geobaseid"`
+                Latitude float64 `json:"latitude"`
+                Longitude float64 `json:"longitude"`
             } `json:"location"`
             Name string `json:"name"`
             Timezone struct {
-                ID string `json:"@id"`
-                UtcoffsetMinutes string `json:"@utcoffsetMinutes"`
+                ID string `json:"id"`
+                UtcoffsetMinutes int `json:"utcoffsetMinutes"`
             } `json:"timezone"`
             Type string `json:"type"`
         } `json:"location"`
@@ -103,34 +102,34 @@ type YrData struct {
         } `json:"meta"`
         Observations struct {
             Weatherstation []struct {
-                Distance string `json:"@distance"`
-                Lat string `json:"@lat"`
-                Lon string `json:"@lon"`
-                Name string `json:"@name"`
-                Source string `json:"@source"`
-                Stno string `json:"@stno"`
-                Sttype string `json:"@sttype"`
+                Distance int `json:"distance"`
+                Lat float64 `json:"lat"`
+                Lon float64 `json:"lon"`
+                Name string `json:"name"`
+                Source string `json:"source"`
+                Stno int `json:"stno"`
+                Sttype string `json:"sttype"`
                 Temperature struct {
-                    Time time.Time `json:"@time"`
-                    Unit string `json:"@unit"`
-                    Value string `json:"@value"`
+                    Time time.Time `json:"time"`
+                    Unit string `json:"unit"`
+                    Value float64 `json:"value"`
                 } `json:"temperature"`
                 WindDirection struct {
-                    Code string `json:"@code"`
-                    Deg string `json:"@deg"`
-                    Name string `json:"@name"`
-                    Time time.Time `json:"@time"`
+                    Code string `json:"code"`
+                    Deg float64 `json:"deg"`
+                    Name string `json:"name"`
+                    Time time.Time `json:"time"`
                 } `json:"windDirection,omitempty"`
                 WindSpeed struct {
-                    Mps string `json:"@mps"`
-                    Name string `json:"@name"`
-                    Time time.Time `json:"@time"`
+                    Mps float64 `json:"mps"`
+                    Name string `json:"name"`
+                    Time time.Time `json:"time"`
                 } `json:"windSpeed,omitempty"`
             } `json:"weatherstation"`
         } `json:"observations"`
         Sun struct {
-            Rise string `json:"@rise"`
-            Set string `json:"@set"`
+            Rise string `json:"rise"`
+            Set string `json:"set"`
         } `json:"sun"`
     } `json:"weatherdata"`
 }
