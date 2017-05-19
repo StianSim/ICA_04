@@ -109,7 +109,11 @@ func fahrenheitToCelsius(f float64) float64 {
 // fields.
 func GetWeather() Weather {
     // Get the latest polled data from each of the APIs
-    acw := AccuWeather()
+    // Av en eller annen grunn, gir ikke AccuWeather-APIen oss tilgang lenger,
+    // så for å unngå større refaktorering, lager vi nil-verdi for acw, og
+    // kommenterer ut litt kode.
+    //acw := AccuWeather()
+    var acw AccuWeatherData
     owm := OpenWeatherMap()
     wun := Wunderground()
     yr := Yr()
@@ -131,7 +135,7 @@ func GetWeather() Weather {
         Conditions: yr.Weatherdata.Forecast.Tabular.Time[0].Symbol.Name,
         // Get the average temperature from all of the API's latest readings
         Temperature: average(
-            acw[0].Temperature.Metric.Value,
+            //acw[0].Temperature.Metric.Value,
             owm.Main.Temp,
             wun.CurrentObservation.TempC,
             dsk.Currently.TemperatureC,

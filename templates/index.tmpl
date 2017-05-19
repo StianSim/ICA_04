@@ -8,7 +8,7 @@
     <script src="https://use.fontawesome.com/1952921e42.js"></script>
     <link href="/assets/css/weather-icons.min.css" rel="stylesheet">
     <link href="/assets/css/weather-icons-wind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Oswald:700|Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Oswald:700|Roboto" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -19,7 +19,7 @@
             <a field="Yr: {{ with $yr := index .Yr.Weatherdata.Observations.Weatherstation 0}}{{ $yr.Temperature.Value}}{{ end }}°C |
                         OpenWeatherMap: {{ .OpenWeatherMap.Main.Temp }}°C |
                         Wunderground: {{ .Wunderground.CurrentObservation.TempC }}°C |
-                        AccuWeather: {{ with $acw := index .AccuWeather 0 }}{{ $acw.Temperature.Metric.Value }}{{ end }}°C |
+                        {{ /* AccuWeather: {{ with $acw := index .AccuWeather 0 }}{{ $acw.Temperature.Metric.Value }}{{ end }}°C | */ }}
                         DarkSky: {{ .DarkSky.Currently.TemperatureC | printf "%.2f" }}°C" class="tooltip">
                 <i class="wi wi-thermometer"></i>
                 {{ .Temperature | printf "%.2f" }}°C
